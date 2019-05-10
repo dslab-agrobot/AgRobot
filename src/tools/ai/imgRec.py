@@ -30,6 +30,16 @@ import cv2
 import datetime
 
 
+def Zoom(frame, zoomSize):
+    c_x = frame.shape[0] / 2
+    c_y = frame.shape[1] / 2
+    w_x = c_x / zoomSize
+    w_y = c_y / zoomSize
+    frame = frame[int(c_x - w_x):int(c_x + w_x), int(c_y - w_y):int(c_y + w_y)]
+    frame = cv2.resize(frame, ((int(frame.shape[1] * zoomSize)),
+                               (int(frame.shape[0] * zoomSize))))
+    return frame
+
 class ImgRec(object):
     """Image-Recoder for grapping imgs from two cameras
 
@@ -65,7 +75,7 @@ class ImgRec(object):
     def __del__(self):
         self.cap_h.release()
         self.cap_l.release()
-    
+
     def capture_frame(self):
 
         if not (self.cap_l.isOpened()and self.cap_h.isOpened()):
@@ -77,6 +87,9 @@ class ImgRec(object):
         ret_h, frame_h = self.cap_h.retrieve()
         ret_l = self.cap_l.grab()
         ret_l, frame_l = self.cap_l.retrieve()
+
+        # zoom this frame for remove
+        frame_h =Zoom(frame_h, 1.05)
 
         # name the photo by date and time that we can make it easier for 
         # recording and sorting

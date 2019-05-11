@@ -28,37 +28,99 @@ Edit crontab with 'crontab -e' as below, then it can be executed automatic
 """
 
 import sys
-
+import serial
 # import python script by absolute path due to using crontab
 sys.path.append("/home/jc/Projects/AgRobot/src/tools/ai/")
 
 import imgRec
 
 
-def move_x(dis):
-    pass
+STEP_X = 400  # each step for 12m side in mm
+STEP_Y = 300  # each step for 1m side in mm
 
 
-def move_y(dis):
-    pass
-
-
-STEP_X = 10  # each step for 12m side in mm
-STEP_Y = 12  # each step for 1m side in mm
-
-
-WALK_X = 40  # max walks for 12m side
-WALK_Y = 10  # max walks for 1m side
-
-
-# init a recoder to take and join photos
-Recoder = imgRec.ImgRec()
+WALK_X = 2  # max walks for 12m side
+WALK_Y = 0  # max walks for 1m side
 
 
 w_x = 0  # current walk in x
 w_y = 0  # current walk in y
 
 
+class Ser(object):
+
+    def __init__(self):
+        self.port = serial.Serial(port='/dev/ttyACM0', baudrate=115200,
+                                  timeout=2)
+
+    def send_cmd(self, cmd):
+        self.port.write(cmd)
+
+        response = self.port.readall()
+        #response = self.convert_hex(response)
+        return response
+
+    def convert_hex(self, string):
+        res = []
+        result = []
+        for item in string:
+            res.append(item)
+        for i in res:
+            result.append(hex(i))
+
+        return result
+
+s = Ser()
+
+
+def move_x(dis):
+
+    cmd = "X"
+    if dis >= 0 :
+        if dis < 10 :
+            cmd += '+00'
+        elif dis <100 :
+            cmd += '+0'
+        else:
+            cmd += '+'
+    else:
+        if dis > -10 :
+            cmd += '-00'
+        elif dis > -100:
+            cmd += '-0'
+        else :
+            cmd += '-'
+    cmd += str(abs(dis))
+    print(cmd)
+    return s.send_cmd(cmd)
+
+
+
+def move_y(dis):
+    cmd = "Y"
+    if dis >= 0:
+        if dis < 10:
+            cmd += '+00'
+        elif dis < 100:
+            cmd += '+0'
+        else:
+            cmd += '+'
+    else:
+        if dis > -10:
+            cmd += '-00'
+        elif dis > -100:
+            cmd += '-0'
+        else:
+            cmd += '-'
+    cmd += str(abs(dis))
+    print(cmd)
+    return s.send_cmd(cmd)
+
+# print(s.send_cmd("Y+010").split("\n")[1][:5])
+
+
+# init a recoder to take and join photos
+Recoder = imgRec.ImgRec()
 
 for w_y in range(WALK_Y):
 
@@ -85,6 +147,13 @@ for w_y in range(WALK_Y):
 
 # it will close and release cameras' resources by itself
 del Recoder
+
+
+
+
+
+
+
 
 
 

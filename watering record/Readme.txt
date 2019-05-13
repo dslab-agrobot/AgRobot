@@ -1,1 +1,1 @@
-This directory saves and updates the record of potato-watering pr 3 days.
+This directory saves and updates the record of potato-watering per 3 days.

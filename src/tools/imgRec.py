@@ -7,10 +7,16 @@ __email__ = "<jiangxt404@qq.com>"
 __license__ = "GPL V3"
 __version__ = "0.1"
 
+Simple test for this script :
+```
+python3 imgRec.py    # give a joined pic with date-time label
+```
+
 
 Use this script by :
 ```
-
+recoder = recoder = ImgRec()
+recoder.capture_frame()
 ```
 
 
@@ -19,10 +25,10 @@ Use this script by :
 ATTENTION PLEASE
 
 You need to plug the two camera with order in a raspberry-pi
-due to open-cv made default index when it pluged.
+due to open-cv made default index when it plugged.
 
 Make Sure the FIRST one that be plugged should be the
-HIGHT RESOLUTION one .
+HIGH RESOLUTION one .
 ------------------------------------------------------------
 """
 
@@ -40,19 +46,16 @@ def Zoom(frame, zoomSize):
                                (int(frame.shape[0] * zoomSize))))
     return frame
 
+
 class ImgRec(object):
-    """Image-Recoder for grapping imgs from two cameras
+    """ Image-Recoder for graping and joining images from two cameras
 
-    
-    **** how to use or something ****
-
-
-    Attributes:
-        **** tbd ****
 
     """
 
     def __init__(self):
+        # open exist camera failed will raise an exception
+        # but it will say nothing with zero camera
         self.cap_h = cv2.VideoCapture(0)
         self.cap_l = cv2.VideoCapture(1)
         
@@ -62,8 +65,8 @@ class ImgRec(object):
         self.cap_l.set(cv2.CAP_PROP_FRAME_WIDTH,640) # set the Horizontal resolution
         self.cap_l.set(cv2.CAP_PROP_FRAME_HEIGHT,480) # Set the Vertical resolution
         
-        # Try setting to better effect of camera with hight resolution
-        self.cap_h.set(cv2.CAP_PROP_BRIGHTNESS,100)
+        # Try setting to better effect of camera with high resolution
+        self.cap_h.set(cv2.CAP_PROP_BRIGHTNESS,10)
         self.cap_h.set(cv2.CAP_PROP_SATURATION,100)
         self.cap_h.set(cv2.CAP_PROP_CONTRAST,30)
 
@@ -76,13 +79,24 @@ class ImgRec(object):
         self.cap_h.release()
         self.cap_l.release()
 
-    def capture_frame(self):
+    def capture_frame(self, name=None):
+        """Capture and join pictures
 
-        if not (self.cap_l.isOpened()and self.cap_h.isOpened()):
-            return False
+        Get a picture of field by high-resolution camera , a picture of tape
+        by low-resolution one , then crop the lower one into 80x80 pixes and
+        put this into left-up corner of the higher one
+
+        :param name:name of this picture ,default is YMD-H:M:S
+        :return: none
+
+        :raise Exception:occur when at least one of camera can not be opened
+        """
+
+        if not (self.cap_l.isOpened() and self.cap_h.isOpened()):
+            raise Exception('Cameras can not be opened')
         
-        # grab the frmae with grab/retrieve so we can connect multiple
-        # cameras and get roughly synchronized imnages
+        # grab the frame with grab/retrieve so we can connect multiple
+        # cameras and get roughly synchronized images
         ret_h = self.cap_h.grab()
         ret_h, frame_h = self.cap_h.retrieve()
         ret_l = self.cap_l.grab()
@@ -93,8 +107,9 @@ class ImgRec(object):
 
         # name the photo by date and time that we can make it easier for 
         # recording and sorting
-        now_time = datetime.datetime.now()
-        time_string = now_time.strftime("%Y%m%d_%H:%M:%S")
+        if name is None:
+            now_time = datetime.datetime.now()
+            name = now_time.strftime("%Y%m%d_%H:%M:%S")
         
         # show before joining
         # cv2.imshow('USB0-frame', frame_h)
@@ -111,7 +126,7 @@ class ImgRec(object):
         # cv2.imshow('JOIN-frame', frame_h)
         
         # write the joined picture with timed name 
-        cv2.imwrite(time_string + ".jpg", frame_h)
+        cv2.imwrite(name + ".jpg", frame_h)
         
         # delete rets and frames
         del ret_h,ret_l,frame_h,frame_l
@@ -124,3 +139,10 @@ class ImgRec(object):
     def capture_video(self):
         # TBD
         pass
+
+
+if __name__ == "__main__":
+    recoder = ImgRec()
+    recoder.capture_frame()
+    
+

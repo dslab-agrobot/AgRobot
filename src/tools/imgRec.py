@@ -4,8 +4,9 @@ Capture img from two camera and join them for Agrobot
 
 __copyright__="Jiangxt"
 __email__ = "<jiangxt404@qq.com>"
+__updated__ = 'Weiyq<wyq_l@qq.com>'
 __license__ = "GPL V3"
-__version__ = "0.1"
+__version__ = "0.2"
 
 Simple test for this script :
 ```

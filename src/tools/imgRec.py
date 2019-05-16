@@ -34,7 +34,8 @@ HIGH RESOLUTION one .
 """
 
 import cv2
-import datetime,os
+import datetime
+import subprocess
 import numpy as np
 
 def Zoom(frame, zoomSize):
@@ -95,8 +96,9 @@ class ImgRec(object):
         :raise Exception:occur when at least one of pics are None 
         """
         #
-        msg1 = os.popen('fswebcam -d /dev/video0 --no-banner -r 1980x1080 high.JPG')
-        msg2 = os.popen('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG')
+
+        msg1 = subprocess.call('fswebcam -d /dev/video0 --no-banner -r 1980x1080 high.JPG', shell=True)
+        msg2 = subprocess.call('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG', shell=True)
 
         print(msg1)
         print(msg2)

@@ -4,8 +4,9 @@ Capture img from two camera and join them for Agrobot
 
 __copyright__="Jiangxt"
 __email__ = "<jiangxt404@qq.com>"
+__updated__='Weiyq<wyq_l@qq.com>'
 __license__ = "GPL V3"
-__version__ = "0.1"
+__version__ = "0.2"
 
 Simple test for this script :
 ```
@@ -34,7 +35,7 @@ HIGH RESOLUTION one .
 
 import cv2
 import datetime
-
+import numpy as np
 
 def Zoom(frame, zoomSize):
     c_x = frame.shape[0] / 2
@@ -79,7 +80,7 @@ class ImgRec(object):
         self.cap_h.release()
         self.cap_l.release()
 
-    def capture_frame(self, name=None):
+    def capture_frame(self, name=None,high_path=None, low_path=None):
         """Capture and join pictures
 
         Get a picture of field by high-resolution camera , a picture of tape
@@ -87,20 +88,25 @@ class ImgRec(object):
         put this into left-up corner of the higher one
 
         :param name:name of this picture ,default is YMD-H:M:S
+        :param high_path: photo take by high-resolution camera  &pic path 
+        :param low_path: photo take by low-resolution camera  &pic path   
         :return: none
 
-        :raise Exception:occur when at least one of camera can not be opened
+        :raise Exception:occur when at least one of pics are None 
         """
 
-        if not (self.cap_l.isOpened() and self.cap_h.isOpened()):
-            raise Exception('Cameras can not be opened')
-        
+        # if not (self.cap_l.isOpened() and self.cap_h.isOpened()):
+        #     raise Exception('Cameras can not be opened')
+        if not (high_path is not None and low_path is not None):
+            raise Exception('pics to be combined is empty')
         # grab the frame with grab/retrieve so we can connect multiple
         # cameras and get roughly synchronized images
-        ret_h = self.cap_h.grab()
-        ret_h, frame_h = self.cap_h.retrieve()
-        ret_l = self.cap_l.grab()
-        ret_l, frame_l = self.cap_l.retrieve()
+        # ret_h = self.cap_h.grab()
+        # ret_h, frame_h = self.cap_h.retrieve()
+        # ret_l = self.cap_l.grab()
+        # ret_l, frame_l = self.cap_l.retrieve()
+        frame_h = cv2.imread(high_path)
+        frame_l = cv2.imread(low_path)
 
         # zoom this frame for remove
         frame_h =Zoom(frame_h, 1.05)
@@ -109,7 +115,10 @@ class ImgRec(object):
         # recording and sorting
         if name is None:
             now_time = datetime.datetime.now()
-            name = now_time.strftime("%Y%m%d_%H:%M:%S")
+            #in windows
+            name = now_time.strftime("%Y%m%d_%H_%M_%S")
+            #in linux 
+            # name = now_time.strftime("%Y%m%d_%H:%M:%S")
         
         # show before joining
         # cv2.imshow('USB0-frame', frame_h)
@@ -120,7 +129,8 @@ class ImgRec(object):
         roi = frame_l[415:495, 0:480]
 
         # make a transpose
-        roi = zip(*roi)
+        # for Vertical position pic
+        # roi= roi.transpose((1,0,2))
 
         # if we need flip in vertical
         # roi = roi[::-1]
@@ -129,7 +139,8 @@ class ImgRec(object):
         # roi = roi[::-1,::-1][::-1]
 
         # join the cropped frame and another one
-        frame_h[0:480, 0:80] = roi
+        # frame_h[0:480, 0:80] = roi # vertical pisition pic combine
+        frame_h[0:80, 0:480] = roi # horizontal  pisition pic combine
 
         # show after processing
         # cv2.imshow('JOIN-frame', frame_h)
@@ -138,7 +149,7 @@ class ImgRec(object):
         cv2.imwrite(name + ".jpg", frame_h)
 
         # delete rets and frames
-        del ret_h,ret_l,frame_h,frame_l
+        del frame_h,frame_l
         
         # do not forget to destroy windows after showing them
         # cv2.destroyWindow('USB0-frame')
@@ -152,6 +163,6 @@ class ImgRec(object):
 
 if __name__ == "__main__":
     recoder = ImgRec()
-    recoder.capture_frame()
+    recoder.capture_frame(None ,'high.JPG','low.JPG')
     
 

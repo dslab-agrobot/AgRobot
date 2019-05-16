@@ -35,7 +35,7 @@ HIGH RESOLUTION one .
 
 import cv2
 import datetime
-import subprocess
+import subprocess,os
 import numpy as np
 
 def Zoom(frame, zoomSize):
@@ -56,31 +56,9 @@ class ImgRec(object):
     """
 
     def __init__(self):
-        # open exist camera failed will raise an exception
-        # but it will say nothing with zero camera
-        self.cap_h = cv2.VideoCapture(0)
-        self.cap_l = cv2.VideoCapture(1)
-        
-        # Try setting to higher resolution
-        self.cap_h.set(cv2.CAP_PROP_FRAME_WIDTH,1280) # set the Horizontal resolution
-        self.cap_h.set(cv2.CAP_PROP_FRAME_HEIGHT,720) # Set the Vertical resolution
-        self.cap_l.set(cv2.CAP_PROP_FRAME_WIDTH,640) # set the Horizontal resolution
-        self.cap_l.set(cv2.CAP_PROP_FRAME_HEIGHT,480) # Set the Vertical resolution
-        
-        # Try setting to better effect of camera with high resolution
-        self.cap_h.set(cv2.CAP_PROP_BRIGHTNESS,10)
-        self.cap_h.set(cv2.CAP_PROP_SATURATION,100)
-        self.cap_h.set(cv2.CAP_PROP_CONTRAST,30)
-
-        # Try setting to better effect of camera with low resolution
-        self.cap_l.set(cv2.CAP_PROP_BRIGHTNESS,0)
-        self.cap_l.set(cv2.CAP_PROP_SATURATION,50)
-        self.cap_l.set(cv2.CAP_PROP_CONTRAST,35)
-
+        pass
     def __del__(self):
-        self.cap_h.release()
-        self.cap_l.release()
-
+        pass
     def capture_frame(self, name=None,high_path=None, low_path=None):
         """Capture and join pictures
 
@@ -96,16 +74,9 @@ class ImgRec(object):
         :raise Exception:occur when at least one of pics are None 
         """
         #
+        os.system('fswebcam -d /dev/video0 --no-banner -r 1280x720 high.JPG')
+        os.system('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG')
 
-        sp1 = subprocess.Popen('fswebcam -d /dev/video0 --no-banner -r 1980x1080 high.JPG',
-                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        sp1.wait()
-        sp2 = subprocess.Popen('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG',
-                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        sp2.wait()
-
-        print(sp1.stdout.read().decode('utf-8'))
-        print(sp2.stdout.read().decode('utf-8'))
 
         # if not (self.cap_l.isOpened() and self.cap_h.isOpened()):
         #     raise Exception('Cameras can not be opened')

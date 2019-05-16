@@ -34,7 +34,7 @@ HIGH RESOLUTION one .
 """
 
 import cv2
-import datetime
+import datetime,os
 import numpy as np
 
 def Zoom(frame, zoomSize):
@@ -94,6 +94,12 @@ class ImgRec(object):
 
         :raise Exception:occur when at least one of pics are None 
         """
+        #
+        msg1 = os.popen('fswebcam -d /dev/video0 --no-banner -r 1980x1080 high.JPG')
+        msg2 = os.popen('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG')
+
+        print(msg1)
+        print(msg2)
 
         # if not (self.cap_l.isOpened() and self.cap_h.isOpened()):
         #     raise Exception('Cameras can not be opened')

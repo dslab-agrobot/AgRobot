@@ -27,13 +27,10 @@ Edit crontab with 'crontab -e' as below, then it can be executed automatic
 
 """
 
-import sys
+import sys,time
 import serial
 # import python script by absolute path due to using crontab
-sys.path.append("/home/jc/Projects/AgRobot/src/tools/ai/")
-
-import imgRec
-
+sys.path.append("/home/magic-board/src/tools/ai/")
 
 STEP_X = 400  # each step for 12m side in mm
 STEP_Y = 300  # each step for 1m side in mm
@@ -52,6 +49,7 @@ class Ser(object):
     def __init__(self):
         self.port = serial.Serial(port='/dev/ttyACM0', baudrate=115200,
                                   timeout=2)
+        time.sleep(2)
 
     def send_cmd(self, cmd):
         self.port.write(cmd)
@@ -73,82 +71,36 @@ class Ser(object):
 s = Ser()
 
 
-def move_x(dis):
-
-    cmd = "X"
-    if dis >= 0 :
-        if dis < 10 :
-            cmd += '+00'
-        elif dis <100 :
-            cmd += '+0'
-        else:
-            cmd += '+'
-    else:
-        if dis > -10 :
-            cmd += '-00'
-        elif dis > -100:
-            cmd += '-0'
-        else :
-            cmd += '-'
-    cmd += str(abs(dis))
-    print(cmd)
-    return s.send_cmd(cmd)
-
-
-
-def move_y(dis):
-    cmd = "Y"
-    if dis >= 0:
-        if dis < 10:
-            cmd += '+00'
-        elif dis < 100:
-            cmd += '+0'
-        else:
-            cmd += '+'
-    else:
-        if dis > -10:
-            cmd += '-00'
-        elif dis > -100:
-            cmd += '-0'
-        else:
-            cmd += '-'
-    cmd += str(abs(dis))
-    print(cmd)
-    return s.send_cmd(cmd)
-
-# print(s.send_cmd("Y+010").split("\n")[1][:5])
 
 
 # init a recoder to take and join photos
-Recoder = imgRec.ImgRec()
-
-for w_y in range(WALK_Y):
-
-    # move half step if neighbor to the border
-    if w_y == 0 or w_y == WALK_Y-1:
-        move_y(STEP_Y/2)
-        pass
-    else:
-        move_y(STEP_Y)
-        pass
-
-    for w_x in range(WALK_X):
-
-        # move half step if neighbor to the border
-        if w_x == 0 or w_x == WALK_X - 1:
-            move_x(STEP_X/2)
-            pass
-        else:
-            move_x(STEP_X)
-            pass
-
-        # take photos in longer side makes it ..... energy-saving
-        Recoder.capture_frame()
-
-# it will close and release cameras' resources by itself
-del Recoder
-
-
+#Recoder = imgRec.ImgRec()
+#
+#for w_y in range(WALK_Y):
+#
+#    # move half step if neighbor to the border
+#    if w_y == 0 or w_y == WALK_Y-1:
+#        move_y(STEP_Y/2)
+#        pass
+#    else:
+#        move_y(STEP_Y)
+#        pass
+#
+#    for w_x in range(WALK_X):
+#
+#        # move half step if neighbor to the border
+#        if w_x == 0 or w_x == WALK_X - 1:
+#            move_x(STEP_X/2)
+#            pass
+#        else:
+#            move_x(STEP_X)
+#            pass
+#
+#        # take photos in longer side makes it ..... energy-saving
+#        Recoder.capture_frame()
+#
+## it will close and release cameras' resources by itself
+#del Recoder
 
 
 

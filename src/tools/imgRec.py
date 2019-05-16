@@ -97,11 +97,15 @@ class ImgRec(object):
         """
         #
 
-        msg1 = subprocess.call('fswebcam -d /dev/video0 --no-banner -r 1980x1080 high.JPG', shell=True)
-        msg2 = subprocess.call('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG', shell=True)
+        sp1 = subprocess.Popen('fswebcam -d /dev/video0 --no-banner -r 1980x1080 high.JPG',
+                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        sp1.wait()
+        sp2 = subprocess.Popen('fswebcam -d /dev/video1 --no-banner -r 1280x720 low.JPG',
+                               shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        sp2.wait()
 
-        print(msg1)
-        print(msg2)
+        print(sp1.stdout.read().decode('utf-8'))
+        print(sp2.stdout.read().decode('utf-8'))
 
         # if not (self.cap_l.isOpened() and self.cap_h.isOpened()):
         #     raise Exception('Cameras can not be opened')

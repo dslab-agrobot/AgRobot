@@ -2,7 +2,7 @@
 Capture img from two camera and join them for Agrobot
 
 
-__copyright__="Jiangxt; Zhip"
+__copyright__="Jiangxt"
 __email__ = "<jiangxt404@qq.com>"
 __license__ = "GPL V3"
 __version__ = "0.1"
@@ -117,17 +117,26 @@ class ImgRec(object):
         
         # ROI range of the low resolution camera , the tape will be
         # capture at the corner of left-top roughly [0:80,0:80]
-        roi = frame_l[0:80, 0:80]
+        roi = frame_l[415:495, 0:480]
+
+        # make a transpose
+        roi = zip(*roi)
+
+        # if we need flip in vertical
+        # roi = roi[::-1]
+
+        # if we need flip in horizon
+        # roi = roi[::-1,::-1][::-1]
 
         # join the cropped frame and another one
-        frame_h[0:80, 0:80] = roi
+        frame_h[0:480, 0:80] = roi
 
         # show after processing
         # cv2.imshow('JOIN-frame', frame_h)
         
         # write the joined picture with timed name 
         cv2.imwrite(name + ".jpg", frame_h)
-        
+
         # delete rets and frames
         del ret_h,ret_l,frame_h,frame_l
         

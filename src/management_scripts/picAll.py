@@ -28,80 +28,69 @@ Edit crontab with 'crontab -e' as below, then it can be executed automatic
 """
 
 import sys,time
-import serial
-# import python script by absolute path due to using crontab
-sys.path.append("/home/magic-board/src/tools/ai/")
 
-STEP_X = 400  # each step for 12m side in mm
-STEP_Y = 300  # each step for 1m side in mm
+# without package management in version-0.1 , we need to
+# append system path for our scripts
+sys.path.append("/home/magic-board/Desktop/AgRobot-master/src/management_scripts/")
+sys.path.append("/home/magic-board/Desktop/AgRobot-master/src/tools/")
+
+from management_scripts import navigator
+# import python script by absolute path due to using crontab
+
+from tools import imgRec
+
+STEP_X = -500  # each step for 12m side in mm
+STEP_Y = -70  # each step for 1m side in mm
 
 
 WALK_X = 2  # max walks for 12m side
-WALK_Y = 0  # max walks for 1m side
+WALK_Y = 2  # max walks for 1m side
 
+# init a recoder to take and join photos
+Recoder = imgRec.ImgRec()
+
+# init a navigator to control robot
+nav = navigator.Navigator()
+
+# aimed at saving energy , we decided to move robot's y-aix
+# more often , and move like by S route.
+# S route for (x,y) like :
+# (0,0) (0.5,0.25) (0.5,0.5) (0.5,0.75)
+# (1,0.75) (1.0,0.5) .....  (11.5,0.75)
 
 w_x = 0  # current walk in x
 w_y = 0  # current walk in y
+dir_y = 1  # direction for y
+
+# when finished walking in y , change dir NEXT TIME
+_preChange_y = True
+
+"""
+↑   ┏━━━━┓   ┏━━━━┓
+Y   ┃    ┃   ┃    ┃ 
+X→       ┗━━━┛    ┗━━━┛
+move like curve up there 
+what a beautiful art , (ฅ•-•ฅ) , isn't it?
+"""
+
+# use a boolean to control robot not to turn back
+# immediately when finished y
+for w_x in range(WALK_X):
+    for w_y in range(WALK_Y):
+        # new dir has been set but not move when it start
+        if _preChange_y:
+            _preChange_y = False
+        else:
+            nav.move_y(dir_y * STEP_Y)
+        Recoder.capture_frame()
+    _preChange_y = True
+    # set the contrary of original direction
+    dir_y *= -1
+    nav.move_x(STEP_X)
 
 
-class Ser(object):
-
-    def __init__(self):
-        self.port = serial.Serial(port='/dev/ttyACM0', baudrate=115200,
-                                  timeout=2)
-        time.sleep(2)
-
-    def send_cmd(self, cmd):
-        self.port.write(cmd)
-
-        response = self.port.readall()
-        #response = self.convert_hex(response)
-        return response
-
-    def convert_hex(self, string):
-        res = []
-        result = []
-        for item in string:
-            res.append(item)
-        for i in res:
-            result.append(hex(i))
-
-        return result
-
-s = Ser()
-
-
-
-
-# init a recoder to take and join photos
-#Recoder = imgRec.ImgRec()
-#
-#for w_y in range(WALK_Y):
-#
-#    # move half step if neighbor to the border
-#    if w_y == 0 or w_y == WALK_Y-1:
-#        move_y(STEP_Y/2)
-#        pass
-#    else:
-#        move_y(STEP_Y)
-#        pass
-#
-#    for w_x in range(WALK_X):
-#
-#        # move half step if neighbor to the border
-#        if w_x == 0 or w_x == WALK_X - 1:
-#            move_x(STEP_X/2)
-#            pass
-#        else:
-#            move_x(STEP_X)
-#            pass
-#
-#        # take photos in longer side makes it ..... energy-saving
-#        Recoder.capture_frame()
-#
-## it will close and release cameras' resources by itself
-#del Recoder
-
+# it will close and release cameras' resources by itself
+del Recoder
 
 
 

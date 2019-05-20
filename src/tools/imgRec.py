@@ -71,6 +71,7 @@ class ImgRec(object):
         self.cap_l.release()
         pass
 
+
     def capture_frame(self, name=None):
         """Capture and join pictures
         Get a picture of field by high-resolution camera , a picture of tape

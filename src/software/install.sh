@@ -22,6 +22,8 @@
 # Change the source of apt
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bac
 sudo cp sources.list /etc/apt/
+sudo cp /etc/motd /etc/motd.bac
+sudp cp motd /etc/motd
 
 sudo apt update
 echo y | sudo apt install python-opencv

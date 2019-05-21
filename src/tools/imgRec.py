@@ -44,15 +44,15 @@ class ImgRec(object):
     def __init__(self):
         # open exist camera failed will raise an exception
         # but it will say nothing with zero camera
-        self.cap_h = cv2.VideoCapture(0)
-        self.cap_l = cv2.VideoCapture(1)
+        self.cap_h = cv2.VideoCapture(1)
+        self.cap_l = cv2.VideoCapture(0)
 
 
         # Try setting to higher resolution
         self.cap_h.set(cv2.CAP_PROP_FRAME_WIDTH,1280) # set the Horizontal resolution
         self.cap_h.set(cv2.CAP_PROP_FRAME_HEIGHT,720) # Set the Vertical resolution
-        self.cap_l.set(cv2.CAP_PROP_FRAME_WIDTH,720) # set the Horizontal resolution
-        self.cap_l.set(cv2.CAP_PROP_FRAME_HEIGHT,540) # Set the Vertical resolution
+        self.cap_l.set(cv2.CAP_PROP_FRAME_WIDTH,640) # set the Horizontal resolution
+        self.cap_l.set(cv2.CAP_PROP_FRAME_HEIGHT,580) # Set the Vertical resolution
         #self.cap_h.set(cv2.CAP_PROP_BUFFERSIZE,5)
 
 
@@ -123,16 +123,15 @@ class ImgRec(object):
         # ROI range of the low resolution camera , the tape will be
         # capture at the corner of left-top roughly [0:80,0:80]
         #todo need to check 
-        roi = frame_l[90:180,:]
+        roi = frame_l[230:320,:]
 
-
-        # cv2.imwrite("low.jpg", frame_l)
-        # cv2.imwrite("high.jpg", frame_h)
+        #cv2.imwrite("low.jpg", frame_l)
+        #cv2.imwrite("high.jpg", frame_h)
         # make a transpose
         roi =roi.transpose((1,0,2))
 
         # if we need flip in vertical
-        roi = roi[::-1]
+        # roi = roi[::-1]
 
         # if we need flip in horizon
         # roi = roi[::-1,::-1][::-1]

@@ -23,12 +23,10 @@ nav.move_y(DISTANCE)
 
 
 """
-import sys
-# without package management in version-0.1 , we need to
-# append system path for our scripts
-sys.path.append("/home/magic-board/Desktop/AgRobot-master/src")
-from tools.connector import RpiArdConnector
+
+from connector import RpiArdConnector
 import argparse
+import pandas as pd
 
 
 # MAX Length for 12m side with mm
@@ -50,13 +48,24 @@ class Navigator(object):
     """
 
     def __init__(self):
-        self.conn = RpiArdConnector()
+        #try:
+        #self.conn = RpiArdConnector()
         # we need to load position from a log last time
+
         self._x = 0
         self._y = 0
+        try:
+            df = pd.read_csv('nav.log', index_col=0, header=None,
+                         parse_dates=True, squeeze=True).to_dict()
+            self._x = df['X']
+            self._y = df['Y']
+        finally:
+            pass
+
 
     def __del__(self):
-        del self.conn
+        #del self.conn
+        self.write_log()
 
     @property
     def pos_x(self):
@@ -131,16 +140,21 @@ class Navigator(object):
         cmd += str(abs(dis))
         return self.conn.send_msg(cmd.encode("ascii"))
 
+    def write_log(self):
+        log ={'X': self.pos_x, 'Y': self.pos_y}
+        pd.Series(log).to_csv('nav.log', header=False)
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("dir", help="direction of it's movement", type=str, choices=['x', 'X', 'y', 'Y'])
-    parser.add_argument("len", help="length of it's movement ", type=int)
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument("dir", help="direction of it's movement", type=str, choices=['x', 'X', 'y', 'Y'])
+    # parser.add_argument("len", help="length of it's movement ", type=int)
+    # args = parser.parse_args()
     nav = Navigator()
-    if args.dir == 'x' or args.dir == 'X':
-        print(nav.move_x(args.len))
-    else:
-        print(nav.move_y(args.len))
+    del nav
+    # if args.dir == 'x' or args.dir == 'X':
+    #     print(nav.move_x(args.len))
+    # else:
+    #     print(nav.move_y(args.len))
 
 

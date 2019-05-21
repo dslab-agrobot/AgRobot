@@ -6,7 +6,13 @@ Debian : armv7l GNU/Linux
 
 ## Software
 
-[Install all softwares in a shell](install.sh)
+* [Installation]
+    + [Install all software in a shell](install.sh)
+    + [Welcome information when log in ](motd)
+    + [Source of apt installation](sources.list)
+    + [Configuration of pip3(and pip)](pip.conf)
+
+
 
 
 ```

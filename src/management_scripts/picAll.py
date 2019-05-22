@@ -89,16 +89,16 @@ what a beautiful art , (ฅ•-•ฅ) , isn't it?
 # use a boolean to control robot not to turn back
 # immediately when finished y
 for w_x in range(WALK_X):
-    #todo need shot 3 times on Y direction
+    #need shot 3 times on Y direction
     if (w_x % 2==0):
         Recoder.capture_frame(None,w_x,0,path)
         time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
-        time.sleep(3)
+        time.sleep(4)
         Recoder.capture_frame(None,w_x,1,path)
         time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
-        time.sleep(3)
+        time.sleep(4)
         Recoder.capture_frame(None,w_x,2,path)
     else:
         Recoder.capture_frame(None,w_x,2,path)

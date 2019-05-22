@@ -21,8 +21,18 @@ $ crontab -e                    # write these cmd in
 ------------------------------------------------------------
 ATTENTION PLEASE
 
+-----------------------------------------|
+left side                                |
+|----------|                             |
+|          |          soil               |
+|      car |                             |
+|----------|                             |
+right side                               |               huyang DOOR 
+------------------------------------------
+
 You need set up the cameras as wrote in src/tools/ai/imgRec.py
 Edit crontab with 'crontab -e' as below, then it can be executed automatic
+before run this python file ,make sure the Y positon is on 150 at the left side 
 ------------------------------------------------------------
 
 """
@@ -39,7 +49,7 @@ from management_scripts import navigator
 
 from tools import imgRec
 STEP_X = -180  # each step for 12m side in mm
-STEP_Y = 360  # each step for 1m side in mm
+STEP_Y = 300  # each step for 1m side in mm
 
 # current file path
 base_path='./'
@@ -62,7 +72,7 @@ dir.mkdir(path)
 # (1,0.75) (1.0,0.5) .....  (11.5,0.75)
 
 w_x = 0  # current walk in x
-w_y = 320  # current walk in y
+w_y = 150  # current walk in y
 dir_y = -1  # direction for y
 
 # when finished walking in y , change dir NEXT TIME
@@ -79,14 +89,22 @@ what a beautiful art , (ฅ•-•ฅ) , isn't it?
 # use a boolean to control robot not to turn back
 # immediately when finished y
 for w_x in range(WALK_X):
-    
+    #todo need shot 3 times on Y direction
     if (w_x % 2==0):
         Recoder.capture_frame(None,w_x,0,path)
         time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
-        time.sleep(4)
+        time.sleep(3)
         Recoder.capture_frame(None,w_x,1,path)
+        time.sleep(3)
+        nav.move_y(dir_y*STEP_Y)
+        time.sleep(3)
+        Recoder.capture_frame(None,w_x,2,path)
     else:
+        Recoder.capture_frame(None,w_x,2,path)
+        time.sleep(3)
+        nav.move_y(dir_y*STEP_Y)
+        time.sleep(4)
         Recoder.capture_frame(None,w_x,1,path)
         time.sleep(3)
         nav.move_y(dir_y*STEP_Y)

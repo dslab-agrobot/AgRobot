@@ -25,7 +25,7 @@ HIGH RESOLUTION one .
 import cv2
 import datetime
 import numpy as np
-
+import os,sys,time
 def Zoom(frame, zoomSize):
     c_x = frame.shape[0] / 2
     c_y = frame.shape[1] / 2
@@ -72,7 +72,7 @@ class ImgRec(object):
         pass
 
 
-    def capture_frame(self,name,X,Y):
+    def capture_frame(self,name,X,Y,path):
         """Capture and join pictures
         Get a picture of field by high-resolution camera , a picture of tape
         by low-resolution one , then crop the lower one into 80x80 pixes and
@@ -114,7 +114,7 @@ class ImgRec(object):
             now_time = datetime.datetime.now()
             name = now_time.strftime("%Y%m%d_%H:%M:%S")
             name=name+'_X'+str(X)+'_Y'+str(Y)
-
+            
 
         # show before joining
         # cv2.imshow('USB0-frame', frame_h)
@@ -147,7 +147,9 @@ class ImgRec(object):
         # cv2.imshow('JOIN-frame', frame_h)
 
         # write the joined picture with timed name
-        cv2.imwrite(name + ".jpg", frame_n)
+        
+        
+        cv2.imwrite(os.path.join(path,name+".jpg"), frame_n)
         # log('20190521_14/20/43  shot_pic  success/failed ')
         # delete rets and frames
         # del ret_h,ret_l,frame_h,frame_l
@@ -169,7 +171,8 @@ if __name__ == "__main__":
     i = 0
     X=0
     Y=0
+    path='./'
     for i in range(1):
-        recoder.capture_frame(None,X,Y)
+        recoder.capture_frame(None,X,Y,path)
 
     del recoder

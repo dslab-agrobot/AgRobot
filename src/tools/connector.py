@@ -6,11 +6,10 @@ import serial
 
 class RpiArdConnector:
     def __init__(self):
-        # dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
-        # self.dev = dev.readline().strip()
-        self.dev='/dev/ttyACM0'
+        dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
+        self.dev = dev.readline().strip()
         self.ser = None
-        # dev.close()
+        dev.close()
 
     def connect(self):
         try:

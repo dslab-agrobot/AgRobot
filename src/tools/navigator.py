@@ -24,7 +24,7 @@ nav.move_y(DISTANCE)
 
 """
 
-from connector import RpiArdConnector
+from tools.connector import send_msg
 import argparse
 import pandas as pd
 
@@ -48,8 +48,7 @@ class Navigator(object):
     """
 
     def __init__(self):
-        #try:
-        #self.conn = RpiArdConnector()
+
         # we need to load position from a log last time
 
         self._x = 0
@@ -64,7 +63,7 @@ class Navigator(object):
 
 
     def __del__(self):
-        #del self.conn
+
         self.write_log()
 
     @property
@@ -118,7 +117,7 @@ class Navigator(object):
             else:
                 cmd += '-'
         cmd += str(abs(dis))
-        return self.conn.send_msg(cmd.encode("ascii"))
+        return send_msg(cmd.encode("ascii"))
 
     def move_y(self, dis):
         self.__delta_y(dis)
@@ -138,7 +137,7 @@ class Navigator(object):
             else:
                 cmd += '-'
         cmd += str(abs(dis))
-        return self.conn.send_msg(cmd.encode("ascii"))
+        return send_msg(cmd.encode("ascii"))
 
     def write_log(self):
         log ={'X': self.pos_x, 'Y': self.pos_y}

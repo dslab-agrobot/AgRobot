@@ -22,7 +22,7 @@ import sys, os, shutil
 import numpy as np
 import cv2
 from os.path import join as pj
-import imgSplice
+from tools import imgSplice
 
 # without package management in version-0.1 , we need to
 # append system path for our scripts

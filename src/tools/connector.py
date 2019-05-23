@@ -13,7 +13,7 @@ class RpiArdConnector:
 
     def connect(self):
         try:
-            self.ser = serial.Serial(self.dev, 115200, timeout=100)
+            self.ser = serial.Serial(self.dev, 115200, timeout=3)
             time.sleep(2)
             return True
         except Exception as e:
@@ -24,8 +24,26 @@ class RpiArdConnector:
         if not self.ser:
             if not self.connect():
               return None
-        self.ser.write(msg)
-        return self.ser.read_until('!!!')
+        for i in range(100):
+            try:
+                print(i)
+                time.sleep(0.1)
+                self.ser.write(msg)
+                break
+            except(Exception):
+                print("ser write msg error")
+            finally:
+                pass
+        msg=None 
+        for i in range(100):
+            try:
+                msg=self.ser.read_until('!!!')
+                break 
+            except(Exception):
+                print("ser read msg error")
+            finally:
+                pass
+        return msg
     
     def disconnect(self):
         if self.ser:

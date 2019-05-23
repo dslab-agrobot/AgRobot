@@ -80,6 +80,7 @@ class ImgRec(object):
         :param name:name of this picture ,default is YMD-H:M:S
         :param X:X position of this picture ,value will be a int ,in 0 - 31 
         :param Y:Y position of this picture,value will be a int ,0 or 1
+        :param path: path for pics to store
         :return: none
         :raise Exception:occur when at least one of camera can not be opened
         """

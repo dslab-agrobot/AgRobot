@@ -96,8 +96,6 @@ class ImgRec(object):
         # grab the frame with grab/retrieve so we can connect multiple
         # cameras and get roughly synchronized images
         
-        # todo ，test if is Nonetype
-        
         # while (not(self.cap_h.grab() and self.cap_l.grab())) :
         ret_h = self.cap_h.grab()
         ret_h, frame_h = self.cap_h.retrieve()
@@ -158,6 +156,7 @@ class ImgRec(object):
         # cv2.destroyWindow('USB0-frame')
         # cv2.destroyWindow('USB1-frame')
         # cv2.destroyWindow('ADD-frame')
+        
 
     def capture_video(self):
         # TBD
@@ -171,7 +170,7 @@ if __name__ == "__main__":
     i = 0
     X=0
     Y=0
-    path='./'
+    path='/home/pi/Desktop/AgRobot/src/tools/'
     for i in range(1):
         recoder.capture_frame(None,X,Y,path)
 

@@ -23,13 +23,13 @@ implementation and initial operation phase of B0.
 
 ## Intent of B0:
 
-  Provide minimal mechanical and electrical/electronical support for
-  data quisition on a fixed (track-bsaed) potatoe-"field" while
+  Provide minimal mechanical and electrical/electronic support for
+  data quisition on a fixed (track-based) potato-"field" while
   assuring basic (minimal) safety properties.
 
-## Software controler (Arduino)
+## Software controlor (Arduino)
 
- ### Arduino statup 
+ ### Arduino startup 
    - Provide ready signal once booted ? e.g. Pi can 
      request status -> response ready-for-command, busy-calibrate or
      error-state (to be defined !)
@@ -37,7 +37,7 @@ implementation and initial operation phase of B0.
    - Input (from Pi3) relative motion distance/direction e.g.
      (+10cm/-20cm) 
    - Reset information (at end of track) to Pi ?? open-issue
-   - Accuracy over the entire track (12m) +/- 3m (duable ?)
+   - Accuracy over the entire track (12m) +/- 3m (durable ?)
  ### Control of y-axis sled motor
    - Input (from Pi3) relative motion command (e.g. +5cm/-10cm)
    - Response Ack (e.g. 0 ok, -1 failed to execute command or
@@ -95,7 +95,7 @@ implementation and initial operation phase of B0.
  structural length <= 90cm total (including wheels !)
  top-torsion structure
    - couble-frame cage (possibly with surface re-inforcement pannels)
-   - hights 10-15cm
+   - height 10-15cm
    - single (uninterrupted) beams on each side
    - corner re-inforcmenets "on demand" TBD
  Whele legs - bending limits/deflection under assumed maximum force (TBD !)
@@ -136,7 +136,7 @@ Structural mechanics requirements (bot)
    to ensure that sled movement can not damage/squeeze the 
    cabling
  Servo cables ? length limit ? TBD - not clear if the servos
-   can be connected over 1.2m cable legth (voltage drop ?)
+   can be connected over 1.2m cable length (voltage drop ?)
  Ultra-sound receiver cables - length limit ? TBD
  I2C <-> PWN-controller cable - mechanical stability TBD
 
@@ -146,12 +146,12 @@ Structural mechanics requirements (bot)
  
  ### Condition monitoring
    - Humidity sensor - Accuracy ??
-   - Temperatur sensor - Accuracy ??
+   - Temperature sensor - Accuracy ??
    - Air pressure sensor - Accuracy ??
    - Sample rate 4-6 times per day (TBD)
  ### High-resolution camera for still pictures
    - 1280/720 minimum 
-   - 24 bit collor resolution
+   - 24 bit color resolution
  ### High-resolution camera for video
    - FPS ??
    - resolution ??
@@ -162,7 +162,7 @@ Structural mechanics requirements (bot)
  ### 2-axis servo for camera gimbal
  Structural mechanics requirements sensor mounting
    - Still image camera Y-axis sled mounted with  U/V rotation (180)
-   - Video camera Y-axis firm streight-down mount
+   - Video camera Y-axis firm straight-down mount
    - stationary low-res Video camera mount-point on leg 10-15 cm 
      above track (test focus range needed)
 
@@ -210,10 +210,10 @@ Structural mechanics requirements (bot)
 ## Server requirements
 
 Management data requirements
- ### Weathre records for Lanzhou (genreal - public available records)
+ ### Weather records for Lanzhou (general - public available records)
    - preferably with a local stored daily weather record
  ### Watering records
-   - Ammount (number of watering cans - roughly euqally filled)
+   - Amount (number of watering cans - roughly equally filled)
    - Time (+/-30min)
    - Person
  ### Operations records

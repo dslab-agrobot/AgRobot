@@ -23,11 +23,13 @@ import cv2
 
 
 
-def splice_h(img_l, img_r, hessian = 400):
+def splice_h(img_l, img_r, hessian = 800):
 
-    cv2.imshow('1', img_l)
-    cv2.imshow('2', img_r)
-    cv2.waitKey()
+    # show for debugging
+    # cv2.imshow('1', img_l)
+    # cv2.imshow('2', img_r)
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
 
     surf = cv2.xfeatures2d.SURF_create(hessian)
     kp1, des1 = surf.detectAndCompute(img_l, None)
@@ -43,7 +45,7 @@ def splice_h(img_l, img_r, hessian = 400):
     good = []
 
     for m, n in matches:
-        if m.distance < 0.5 * n.distance:
+        if m.distance < 0.4 * n.distance:
             good.append(m)
     src_pts = np.array([kp1[m.queryIdx].pt for m in good])
     dst_pts = np.array([kp2[m.trainIdx].pt for m in good])
@@ -58,6 +60,11 @@ def splice_h(img_l, img_r, hessian = 400):
     h = h if h < h1 else h1
 
     dst_corners = cv2.warpPerspective(img_l, M, (w + w1, h))
+
+    # show for debugging
+    # cv2.imshow('succeed', dst_corners)
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
 
     # Try to find the bound of moved left image
     i_u = 0
@@ -77,7 +84,7 @@ def splice_h(img_l, img_r, hessian = 400):
 
     crp = dst_corners[:, shift:w + w1+shift]
 
-    crp[0:h, w-shift:] = img_r
+    crp[0:h, w-shift:] = img_r[0:h]
 
 
     # # try to calc overlap
@@ -105,16 +112,14 @@ def splice_h(img_l, img_r, hessian = 400):
     # M = cv2.getAffineTransform(anchor1, anchor2)
     # qw = cv2.warpAffine(crp, M, (300,h))
 
+    # show for debugging
+    # cv2.imshow('succeed', crp)
+    # # cv2.imshow('te', qw)
+    #
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
 
-    cv2.imshow('succeed', crp)
-    # cv2.imshow('te', qw)
-
-    cv2.waitKey()
-    cv2.destroyAllWindows()
-
-
-
-    return dst_corners
+    return crp
 
 
 def splice_v(img_up, img_down, hessian=400):
@@ -131,11 +136,14 @@ def splice_v(img_up, img_down, hessian=400):
 
 
 # Test part of two function, leave them
-# up_image = cv2.imread('1.jpeg').transpose((1, 0, 2))
-# down_image = cv2.imread('2.jpeg').transpose((1, 0, 2))
-# # cv2.imshow('up', up_image)
-# # cv2.imshow('down', down_image)
-# splice_v(up_image, down_image)
+# up_image = cv2.imread('/home/jc/Pictures/h/temp/X0.jpg')
+# down_image = cv2.imread('/home/jc/Pictures/h/temp/X1.jpg')
+# cv2.imshow('up', up_image)
+# cv2.imshow('down', down_image)
+# cv2.waitKey()
+# im = splice_v(up_image, down_image)
+# cv2.imshow('combine', im)
+
 #
 # left_image = cv2.imread('/home/jc/Pictures/1.jpeg')
 # right_image = cv2.imread('/home/jc/Pictures/2.jpeg')

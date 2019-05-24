@@ -68,11 +68,10 @@ def __init__():
 
         if t_name == cap_h_name and re.match('/dev/video*', t_pos):
             cap_h_pos = st.split('-')[0]
-    dev.close()
     print(cap_l_pos, cap_h_pos)
-    cap_l_pos = cap_l_pos.split('video')[1]
-    cap_h_pos = cap_h_pos.split('video')[1]
-
+    cap_l_pos = int(cap_l_pos.split('video')[1])
+    cap_h_pos = int(cap_h_pos.split('video')[1])
+    
     # open exist camera failed will raise an exception
     # but it will say nothing with zero camera
     cap_h = cv2.VideoCapture(cap_l_pos)
@@ -193,9 +192,6 @@ def capture_video(self):
     # TBD
     pass
     
-dev = os.popen("ls -l /dev/video* | awk '{print $10}'")
-inf = dev.readline().strip()
-dev.close()
 
 if __name__ == "__main__":
 

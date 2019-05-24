@@ -24,7 +24,19 @@ ATTENTION PLEASE
 
 You need set up the cameras as wrote in src/tools/ai/imgRec.py
 Edit crontab with 'crontab -e' as below, then it can be executed automatic
+need to be run with  pi
 ------------------------------------------------------------
 
 """
+import sys,os,time
+sys.path.append("/home/pi/Desktop/AgRobot/src/tools")
+from tools import dir
 
+base_path='/home/pi/Desktop/AgRobot/src/management_scripts/'
+cur_time=dir.cur_time()
+path = base_path+cur_time
+
+agro_server='root@178.128.126.229'
+remote_dir='/home/AgRobot/pics/'
+cmd ='scp -r '+path +' '+agro_server+':'+remote_dir
+os.system(cmd)

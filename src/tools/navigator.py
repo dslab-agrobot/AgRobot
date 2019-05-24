@@ -139,6 +139,10 @@ class Navigator(object):
         cmd += str(abs(dis))
         return send_msg(cmd.encode("ascii"))
 
+    def get_laser_pos(self):
+        send_msg('71'.encode("ascii"), 'laser')
+        return send_msg('01'.encode("ascii"), 'laser')
+
     def write_log(self):
         log ={'X': self.pos_x, 'Y': self.pos_y}
         pd.Series(log).to_csv('nav.log', header=False)
@@ -150,6 +154,7 @@ if __name__ == "__main__":
     # parser.add_argument("len", help="length of it's movement ", type=int)
     # args = parser.parse_args()
     nav = Navigator()
+    print(nav.get_laser_pos())
     del nav
     # if args.dir == 'x' or args.dir == 'X':
     #     print(nav.move_x(args.len))

@@ -4,8 +4,11 @@ import time
 import serial
 
 
-def __init__():
-    dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
+def __init(name):
+    if name is None:
+        dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
+    else:
+        dev = os.popen("ls -l /dev/ttyUSB* | awk '{print $10}'")
     dev = dev.readline().strip()
     ser = None
     dev.close()
@@ -17,8 +20,8 @@ def __init__():
     return ser
 
 
-def send_msg(msg):
-    ser = __init__()
+def send_msg(msg, name = None):
+    ser = __init(name)
     for i in range(100):
         try:
             print(i)

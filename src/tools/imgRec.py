@@ -104,7 +104,7 @@ def __del__(cap_l,cap_h):
     pass
 
 
-def capture_frame(self, name, X, Y, path):
+def capture_frame(name, X, Y, path):
     """Capture and join pictures
     Get a picture of field by high-resolution camera , a picture of tape
     by low-resolution one , then crop the lower one into 80x80 pixes and
@@ -197,16 +197,16 @@ dev = os.popen("ls -l /dev/video* | awk '{print $10}'")
 inf = dev.readline().strip()
 dev.close()
 
-# if __name__ == "__main__":
-#
-#     #for test
-#     i = 0
-#     X=0
-#     Y=0
-#     path='/home/pi/Desktop/AgRobot/src/tools/'
-#     for i in range(1):
-#         capture_frame(None,X,Y,path)
-#
+if __name__ == "__main__":
+
+    #for test
+    i = 0
+    X=0
+    Y=0
+    path='/home/pi/Desktop/AgRobot/src/tools/'
+    for i in range(1):
+        capture_frame(None,X,Y,path)
+
 
 
 

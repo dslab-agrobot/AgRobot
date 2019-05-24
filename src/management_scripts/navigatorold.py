@@ -23,10 +23,19 @@ nav.move_y(DISTANCE)
 
 
 """
-import sys,time
-sys.path.append('/home/pi/Desktop/AgRobot/src')
+import sys
+# without package management in version-0.1 , we need to
+# append system path for our scripts
+sys.path.append("/home/magic-board/Desktop/AgRobot-master/src")
 from tools.connector import RpiArdConnector
 import argparse
+
+
+# MAX Length for 12m side with mm
+MAX_X = 1200
+# MAX Length for 1m side with mm
+MAX_Y = 100
+
 
 class Navigator(object):
     """Navigator to control the robot
@@ -42,12 +51,48 @@ class Navigator(object):
 
     def __init__(self):
         self.conn = RpiArdConnector()
+        # we need to load position from a log last time
+        self._x = 0
+        self._y = 0
 
     def __del__(self):
         del self.conn
 
-    def move_x(self, dis):
+    @property
+    def pos_x(self):
+        """RO position for X
 
+        :return: current pos for x
+        """
+        return self._x
+
+    # hide this x set function for only check by this script
+    def __delta_x(self,v):
+        new_v = self._x + v
+        if new_v > MAX_X or new_v <= 0:
+            print('X !!! %d',new_v)
+        else:
+            self._x = new_v
+
+
+    @property
+    def pos_y(self):
+        """RO position for Y
+
+        :return: current pos for y
+        """
+        return self._y
+
+    # same with y
+    def __delta_y(self, v):
+        new_v = self._y + v
+        if new_v > MAX_Y or new_v <= 0:
+            print('Y !!! %d', new_v)
+        else:
+            self._y = new_v
+
+    def move_x(self, dis):
+        self.__delta_x(dis)
         cmd = "X"
         if dis >= 0:
             if dis < 10:
@@ -64,12 +109,10 @@ class Navigator(object):
             else:
                 cmd += '-'
         cmd += str(abs(dis))
-        conn = RpiArdConnector()
-        time.sleep(2)
-        msg= conn.send_msg(cmd.encode("ascii"))
-        del conn
-        return msg
+        return self.conn.send_msg(cmd.encode("ascii"))
+
     def move_y(self, dis):
+        self.__delta_y(dis)
         cmd = "Y"
         if dis >= 0:
             if dis < 10:
@@ -86,12 +129,8 @@ class Navigator(object):
             else:
                 cmd += '-'
         cmd += str(abs(dis))
-        print (cmd)
-        conn = RpiArdConnector()
-        time.sleep(2)
-        msg= conn.send_msg(cmd.encode("ascii"))
-        del conn
-        return msg
+        return self.conn.send_msg(cmd.encode("ascii"))
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -100,7 +139,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     nav = Navigator()
     if args.dir == 'x' or args.dir == 'X':
-        nav.move_x(args.len)
+        print(nav.move_x(args.len))
     else:
-        nav.move_y(args.len)
+        print(nav.move_y(args.len))
+
 

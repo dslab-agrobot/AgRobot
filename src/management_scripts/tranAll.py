@@ -3,7 +3,7 @@ transfer photos to server per day by scp
 
 
 __copyright__=""
-__email__ = ""
+__email__ = "wyq_l@qq.com"
 __license__ = "GPL V3"
 __version__ = "0.1"
 
@@ -13,7 +13,8 @@ Use this script by :
 $ chmod +x absPath/tranAll.py    # make this script run-able
 $ crontab -e                    # write these cmd in
 
-30 8 * * * python absPath/tranAll.py     # run 8:30 per day
+30 8 * * * python3 /home/pi/Desktop/AgRobot/management_scripts/tranAll.py     
+# run 8:30 per day
 # add some more daily running
 ```
 
@@ -26,3 +27,4 @@ Edit crontab with 'crontab -e' as below, then it can be executed automatic
 ------------------------------------------------------------
 
 """
+

@@ -37,33 +37,29 @@ before run this python file ,make sure the Y positon is on 250 at the left side
 
 """
 
-import sys,time
+import sys,time,os
 # without package management in version-0.1 , we need to
 # append system path for our scripts
 sys.path.append("/home/pi/Desktop/AgRobot/src/management_scripts/")
 sys.path.append("/home/pi/Desktop/AgRobot/src/")
 sys.path.append("/home/pi/Desktop/AgRobot/src/tools")
 from tools import dir
-from management_scripts import navigator
+from tools import navigator
 # import python script by absolute path due to using crontab
 
-from tools import imgRec
+from tools.imgRec import capture_frame,capture_video
 STEP_X = 150  # each step for 12m side in mm
 STEP_Y = 250  # each step for 1m side in mm
 
 # current file path
-base_path='./'
+base_path = os.path.split(os.path.realpath(__file__))[0]
 WALK_X = 30  # max walks for 12m side
-# WALK_Y = 2  # max walks for 1m side
-
-# init a recoder to take and join photos
-#Recoder = imgRec.ImgRec()
 
 # init a navigator to control robot
 nav = navigator.Navigator()
 # pics saved path
-path=base_path+dir.cur_time()
-#mkdir new path for saving pics
+path = base_path+dir.cur_time()
+# mkdir new path for saving pics
 dir.mkdir(path)
 # aimed at saving energy , we decided to move robot's y-aix
 # more often , and move like by S route.
@@ -89,47 +85,31 @@ what a beautiful art , (ฅ•-•ฅ) , isn't it?
 # use a boolean to control robot not to turn back
 # immediately when finished y
 for w_x in range(WALK_X):
-    #need shot 3 times on Y direction
+    # need shot 3 times on Y direction
     if (w_x % 2==0):
-        Recoder = imgRec.ImgRec()
-        print('1')
-        Recoder.capture_frame(None,w_x,0,path)
-        print('2')
-        del Recoder
-        print('3')
-        time.sleep(3)
+        capture_frame(None,w_x,0,path)
+        # time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
         time.sleep(4)
-        Recoder = imgRec.ImgRec()
-        Recoder.capture_frame(None,w_x,1,path)
-        del Recoder
-        time.sleep(3)
+        capture_frame(None,w_x,1,path)
+        # time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
         time.sleep(4)
-        Recoder = imgRec.ImgRec()
-        Recoder.capture_frame(None,w_x,2,path)
-        del Recoder
+        capture_frame(None,w_x,2,path)
     else:
-        Recoder = imgRec.ImgRec()
-        Recoder.capture_frame(None,w_x,2,path)
-        del Recoder
-        time.sleep(3)
+        capture_frame(None,w_x,2,path)
+        # time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
         time.sleep(4)
-        Recoder = imgRec.ImgRec()
-        Recoder.capture_frame(None,w_x,1,path)
-        del Recoder
-        time.sleep(3)
+        capture_frame(None,w_x,1,path)
+        # time.sleep(3)
         nav.move_y(dir_y*STEP_Y)
         time.sleep(4)
-        Recoder = imgRec.ImgRec()
-        Recoder.capture_frame(None,w_x,0,path)
-        del Recoder
+        capture_frame(None,w_x,0,path)
     dir_y = dir_y * -1
-    time.sleep(3)
+    # time.sleep(3)
     nav.move_x(STEP_X)
+    time.sleep(4)
     # log('20190521_14/20/43  move_Y_from_?_to_?  success/failed ')
 
-# it will close and release cameras' resources by itself
-#del Recoder
 del nav

@@ -4,34 +4,44 @@ import time
 import serial
 
 
-class RpiArdConnector:
-    def __init__(self):
-        dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
-        self.dev = dev.readline().strip()
-        self.ser = None
-        dev.close()
+def __init__():
+    dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
+    dev = dev.readline().strip()
+    ser = None
+    dev.close()
+    try:
+        ser = serial.Serial(dev, 115200, timeout=3)
+        time.sleep(2)
+    except Exception as e:
+        print ('[Error] Failed to connect arduino. Reason:', e)
+    return ser
 
-    def connect(self):
+
+def send_msg(msg):
+    ser = __init__()
+    for i in range(100):
         try:
-            self.ser = serial.Serial(self.dev, 115200, timeout=100)
-            time.sleep(2)
-            return True
-        except Exception as e:
-            print ('[Error] Failed to connect arduino. Reason:', e)
-            return False
-
-    def send_msg(self, msg):
-        if not self.ser:
-            if not self.connect():
-              return None
-        self.ser.write(msg)
-        return self.ser.read_until('!!!')
-    
-    def disconnect(self):
-        if self.ser:
-            self.ser.close()
+            print(i)
+            time.sleep(0.1)
+            ser.write(msg)
+            break
+        except Exception:
+            print("ser write msg error")
+        finally:
+            pass
+    msg = None
+    for i in range(100):
+        try:
+            msg = ser.read_until('!!!')
+            break 
+        except Exception:
+            print("ser read msg error")
+        finally:
+            pass
+    if ser:
+        ser.close()
+    return msg
 
 
 if __name__ == '__main__':
-    connector = RpiArdConnector() 
-    print (connector.send_msg('X+0043;'))
+    print (send_msg('X+0043;'))

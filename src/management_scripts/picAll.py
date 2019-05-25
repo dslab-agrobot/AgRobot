@@ -63,6 +63,14 @@ def execute():
     path = base_path + dir.cur_time()
     # mkdir new path for saving pics
     dir.mkdir(path)
+
+    folders = []
+    for _, folders, _ in os.walk(path):
+        break
+
+    path += '/' + str(folders.__len__())
+    dir.mkdir()
+    
     # aimed at saving energy , we decided to move robot's y-aix
     # more often , and move like by S route.
     # S route for (x,y) like :

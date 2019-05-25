@@ -40,14 +40,14 @@ before run this python file ,make sure the Y positon is on 250 at the left side
 import sys,time,os,argparse
 # without package management in version-0.1 , we need to
 # append system path for our scripts
-sys.path.append("/home/pi/Desktop/AgRobot/src/management_scripts/")
-sys.path.append("/home/pi/Desktop/AgRobot/src/")
-sys.path.append("/home/pi/Desktop/AgRobot/src/tools")
+sys.path.append("/home/pi/AgRobot/src/management_scripts/")
+sys.path.append("/home/pi/AgRobot/src/")
+sys.path.append("/home/pi/AgRobot/src/tools")
 from tools import dir
 from tools import navigator
 # import python script by absolute path due to using crontab
 
-from tools.imgRec import capture_frame,capture_video
+from imgRec import capture_frame,capture_video
 STEP_X = 150  # each step for 12m side in mm
 STEP_Y = 250  # each step for 1m side in mm
 
@@ -60,16 +60,15 @@ def execute():
     # init a navigator to control robot
     nav = navigator.Navigator()
     # pics saved path
-    path = base_path + dir.cur_time()
+    path = base_path+'/' + dir.cur_time()
     # mkdir new path for saving pics
     dir.mkdir(path)
 
     folders = []
     for _, folders, _ in os.walk(path):
         break
-
     path += '/' + str(folders.__len__())
-    dir.mkdir()
+    dir.mkdir(path)
     
     # aimed at saving energy , we decided to move robot's y-aix
     # more often , and move like by S route.

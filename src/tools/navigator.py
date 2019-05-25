@@ -24,7 +24,7 @@ nav.move_y(DISTANCE)
 
 """
 
-from tools.connector import send_msg
+from connector import send_msg
 import argparse
 import pandas as pd
 
@@ -53,13 +53,13 @@ class Navigator(object):
 
         self._x = 0
         self._y = 0
-        try:
-            df = pd.read_csv('nav.log', index_col=0, header=None,
-                         parse_dates=True, squeeze=True).to_dict()
-            self._x = df['X']
-            self._y = df['Y']
-        finally:
-            pass
+       # try:
+       #     df = pd.read_csv('nav.log', index_col=0, header=None,
+       #                  parse_dates=True, squeeze=True).to_dict()
+       #     self._x = df['X']
+       #     self._y = df['Y']
+       # finally:
+       #     pass
 
 
     def __del__(self):
@@ -145,7 +145,7 @@ class Navigator(object):
 
     def write_log(self):
         log ={'X': self.pos_x, 'Y': self.pos_y}
-        pd.Series(log).to_csv('nav.log', header=False)
+        #pd.Series(log).to_csv('nav.log', header=False)
 
 
 if __name__ == "__main__":

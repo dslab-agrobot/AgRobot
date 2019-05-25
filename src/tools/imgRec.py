@@ -153,7 +153,7 @@ def capture_frame(name, X, Y, path):
     # ROI range of the low resolution camera , the tape will be
     # capture at the corner of left-top roughly [0:80,0:80]
     # todo need to check
-    roi = frame_l[190:360, :]
+    roi = frame_l[180:360, :]
 
     # cv2.imwrite("low.jpg", frame_l)
     # cv2.imwrite("high.jpg", frame_h)
@@ -169,7 +169,7 @@ def capture_frame(name, X, Y, path):
     # join the cropped frame and another one
     print(frame_h.shape)
     # frame_h[0:80, 0:479] = roi
-    frame_n = np.zeros((720, 1440, 3))
+    frame_n = np.zeros((720, 1460, 3))
     # frame_h[0:479,640:720] = roi
     frame_n[0:719, 0:1279] = frame_h
     frame_n[:640, 1280:] = roi

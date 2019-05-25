@@ -149,16 +149,16 @@ class Navigator(object):
 
 
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("dir", help="direction of it's movement", type=str, choices=['x', 'X', 'y', 'Y'])
-    # parser.add_argument("len", help="length of it's movement ", type=int)
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("dir", help="direction of it's movement", type=str, choices=['x', 'X', 'y', 'Y'])
+    parser.add_argument("len", help="length of it's movement ", type=int)
+    args = parser.parse_args()
     nav = Navigator()
-    print(nav.get_laser_pos())
-    del nav
-    # if args.dir == 'x' or args.dir == 'X':
-    #     print(nav.move_x(args.len))
-    # else:
-    #     print(nav.move_y(args.len))
 
+    if args.dir == 'x' or args.dir == 'X':
+        print(nav.move_x(args.len))
+    else:
+        print(nav.move_y(args.len))
+    # print(nav.get_laser_pos())
+    del nav
 

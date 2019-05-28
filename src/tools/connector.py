@@ -4,19 +4,23 @@ import time
 import serial
 
 
-def __init(name):
+def __init(name=None):
     if name is None:
         dev = os.popen("ls -l /dev/ttyACM* | awk '{print $10}'")
     else:
         dev = os.popen("ls -l /dev/ttyUSB* | awk '{print $10}'")
     dev = dev.readline().strip()
     ser = None
-    dev.close()
     try:
         ser = serial.Serial(dev, 115200, timeout=3)
         time.sleep(2)
     except Exception as e:
         print ('[Error] Failed to connect arduino. Reason:', e)
+        if ser:
+            ser.close()
+            ser = serial.Serial(dev, 115200, timeout=16)
+    finally:
+        pass
     return ser
 
 
@@ -25,11 +29,14 @@ def send_msg(msg, name = None):
     for i in range(100):
         try:
             print(i)
-            time.sleep(0.1)
+            time.sleep(1)
             ser.write(msg)
             break
-        except Exception:
-            print("ser write msg error")
+        except Exception as e:
+            print("ser write msg error", e)
+            if ser:
+               ser.close()
+               ser = __init()
         finally:
             pass
     msg = None
@@ -37,8 +44,11 @@ def send_msg(msg, name = None):
         try:
             msg = ser.read_until('!!!')
             break 
-        except Exception:
-            print("ser read msg error")
+        except Exception as e:
+            print("ser read msg error", e)
+            if ser:
+                ser.close()
+                ser = __init()
         finally:
             pass
     if ser:

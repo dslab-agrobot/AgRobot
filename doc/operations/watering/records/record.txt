@@ -3,3 +3,4 @@
 2019-05-18    From:18:05    To:18:50    watered 80L
 2019-05-21    From:18:10    To:18:55    watered 80L
 2019-05-24    From:18:30    To:19:05    watered 80L
+2019-05-27    From:18:10    To:18:50    watered 80L

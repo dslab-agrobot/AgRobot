@@ -68,7 +68,7 @@ def __init__():
 
         if t_name == cap_h_name and re.match('/dev/video*', t_pos):
             cap_h_pos = st.split('-')[0]
-    print(cap_l_pos, cap_h_pos)
+
     cap_l_pos = int(cap_l_pos.split('video')[1])
     cap_h_pos = int(cap_h_pos.split('video')[1])
     
@@ -114,14 +114,14 @@ def capture_frame(name, X, Y, path):
     :return: none
     :raise Exception:occur when at least one of camera can not be opened
     """
-
+    print(' Current Pos : [%d,%d] ' % (X, Y))
     cap_l, cap_h = __init__()
     # if camera does not open for some reason ,try 100 times,then raise an error
     for i in range(0, 100):
         if not (cap_l.isOpened() and cap_h.isOpened()):
             continue
         else:
-            print("Cameras can  be  opened")
+            print("Cameras          [✔]")
             break
     if i == 99:
         # todo,send mail to maillist
@@ -153,7 +153,7 @@ def capture_frame(name, X, Y, path):
     # ROI range of the low resolution camera , the tape will be
     # capture at the corner of left-top roughly [0:80,0:80]
     # todo need to check
-    roi = frame_l[180:360, :].copy()
+    roi = frame_l[150:330, :].copy()
     print(1,roi.shape)
     roi = cv2.resize(roi, (720,180), interpolation = cv2.INTER_CUBIC)
     print(roi.shape)

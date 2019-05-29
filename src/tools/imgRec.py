@@ -51,8 +51,8 @@ def __init__():
     # The USB-identifier of two cameras
     # /dev/video0 - 046d_0825_418FC3B0
     # /dev/video1 - 046d_0825_F01A0590
-    cap_l_name = '046d_0825_418FC3B0'
-    cap_h_name = '046d_0825_F01A0590'
+    cap_h_name = '046d_0825_418FC3B0'
+    cap_l_name = '046d_0825_F01A0590'
 
     # get current position of this script
     current = os.path.split(os.path.realpath(__file__))[0]
@@ -153,26 +153,30 @@ def capture_frame(name, X, Y, path):
     # ROI range of the low resolution camera , the tape will be
     # capture at the corner of left-top roughly [0:80,0:80]
     # todo need to check
-    roi = frame_l[180:360, :]
+    roi = frame_l[180:360, :].copy()
+    print(1,roi.shape)
+    roi = cv2.resize(roi, (720,180), interpolation = cv2.INTER_CUBIC)
+    print(roi.shape)
 
     # cv2.imwrite("low.jpg", frame_l)
     # cv2.imwrite("high.jpg", frame_h)
     # make a transpose
     roi = roi.transpose((1, 0, 2))
+    roi = np.flip(roi,1)
 
     # if we need flip in vertical
     # roi = roi[::-1]
 
     # if we need flip in horizon
     # roi = roi[::-1,::-1][::-1]
-    print(roi.shape)
+    # print(roi.shape)
     # join the cropped frame and another one
-    print(frame_h.shape)
+    # print(frame_h.shape)
     # frame_h[0:80, 0:479] = roi
     frame_n = np.zeros((720, 1460, 3))
     # frame_h[0:479,640:720] = roi
     frame_n[0:719, 0:1279] = frame_h
-    frame_n[:640, 1280:] = roi
+    frame_n[:, 1280:] = roi
     # show after processing
     # cv2.imshow('JOIN-frame', frame_h)
 
@@ -199,7 +203,7 @@ if __name__ == "__main__":
     i = 0
     X=0
     Y=0
-    path='/home/pi/Desktop/AgRobot/src/tools/'
+    path='/home/pi/AgRobot/src/tools/'
     for i in range(1):
         capture_frame(None,X,Y,path)
 

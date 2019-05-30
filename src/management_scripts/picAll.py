@@ -47,7 +47,7 @@ from tools import dir
 from tools import navigator
 # import python script by absolute path due to using crontab
 
-from imgRec import capture_frame,capture_video
+from imgRec import capture_frame,zone_check,RED_RANGES
 STEP_X = 150  # each step for 12m side in mm
 STEP_Y = 250  # each step for 1m side in mm
 
@@ -76,8 +76,6 @@ def execute():
     # (0,0) (0.5,0.25) (0.5,0.5) (0.5,0.75)
     # (1,0.75) (1.0,0.5) .....  (11.5,0.75)
 
-    w_x = 0  # current walk in x
-    w_y = 250  # current walk in y
     dir_y = -1  # direction for y
 
     # when finished walking in y , change dir NEXT TIME
@@ -116,8 +114,10 @@ def execute():
             time.sleep(4)
             capture_frame(None, w_x, 0, path)
         dir_y = dir_y * -1
-        # time.sleep(3)
-        nav.move_x(STEP_X)
+
+        if nav.move_x(STEP_X) == 'forbidden':
+            print('seems at the end , and Y is %d'% nav.pos_y)
+            break
         time.sleep(4)
         # log('20190521_14/20/43  move_Y_from_?_to_?  success/failed ')
 

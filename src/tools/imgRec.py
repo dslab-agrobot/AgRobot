@@ -25,7 +25,12 @@ HIGH RESOLUTION one .
 import cv2
 import datetime
 import numpy as np
-import os,re
+import os, re
+
+RED_RANGES = np.array([
+    [[155, 43, 35], [180, 255, 255]],
+    [[0, 43, 35], [11, 255, 255]]
+])
 
 
 def Zoom(frame, zoomSize):
@@ -103,15 +108,16 @@ def __del__(cap_l,cap_h):
     pass
 
 
-def capture_frame(name, X, Y, path):
+def capture_frame(name, X, Y, _path):
     """Capture and join pictures
     Get a picture of field by high-resolution camera , a picture of tape
     by low-resolution one , then crop the lower one into 80x80 pixes and
-    put this into left-up corner of the higher one
-    :param name:name of this picture ,default is YMD-H:M:S
+    put this into right of the higher one
+    :param name:name of this picture ,default is YMD-H:M:S; set '' meas don't
+            save it
     :param X:X position of this picture ,value will be a int ,in 0 - 31
     :param Y:Y position of this picture,value will be a int ,0 or 1
-    :return: none
+    :return: Joined photo . Field photo. ROI of tape rule photo
     :raise Exception:occur when at least one of camera can not be opened
     """
     print(' Current Pos : [%d,%d] ' % (X, Y))
@@ -125,7 +131,7 @@ def capture_frame(name, X, Y, path):
             break
     if i == 99:
         # todo,send mail to maillist
-        raise Exception('Cameras can not be opened')
+        raise Exception('Cameras          [✘]')
     # grab the frame with grab/retrieve so we can connect multiple
     # cameras and get roughly synchronized images
 
@@ -152,11 +158,10 @@ def capture_frame(name, X, Y, path):
 
     # ROI range of the low resolution camera , the tape will be
     # capture at the corner of left-top roughly [0:80,0:80]
-    # todo need to check
     roi = frame_l[150:330, :].copy()
-    print(1,roi.shape)
-    roi = cv2.resize(roi, (720,180), interpolation = cv2.INTER_CUBIC)
-    print(roi.shape)
+
+    roi = cv2.resize(roi, (720,180), interpolation=cv2.INTER_CUBIC)
+
 
     # cv2.imwrite("low.jpg", frame_l)
     # cv2.imwrite("high.jpg", frame_h)
@@ -181,8 +186,8 @@ def capture_frame(name, X, Y, path):
     # cv2.imshow('JOIN-frame', frame_h)
 
     # write the joined picture with timed name
-
-    cv2.imwrite(os.path.join(path, name + ".jpg"), frame_n)
+    if name != '':
+        cv2.imwrite(os.path.join(_path, name + ".jpg"), frame_n)
     # log('20190521_14/20/43  shot_pic  success/failed ')
     # delete rets and frames
     # del ret_h,ret_l,frame_h,frame_l
@@ -192,20 +197,66 @@ def capture_frame(name, X, Y, path):
     # cv2.destroyWindow('USB1-frame')
     # cv2.destroyWindow('ADD-frame')
 
-def capture_video(self):
+    return frame_n, frame_h, roi
+
+
+def capture_video():
     # TBD
     pass
-    
+
+
+def zone_check(img, ranges):
+    """
+    Check images for some ranged color
+
+    :param img: RGB images for checking
+    :param ranges: Shape numpy array limited by ranges which shape is[x,2,3]
+    :return: count of ranged pixes, percent of ranged pixes, masked zone
+    """
+    width, height, channel = img.shape
+
+    # transform images to HSV color
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    zone = np.zeros(img.shape[:2])
+
+    for r in ranges:
+        lower = r[0]
+        upper = r[1]
+
+        # set ranged pixes with 255 for each mask
+        # then add all masks
+        zone += cv2.inRange(hsv, lower, upper)
+
+    # cv2.imshow('RAW', img)
+    # cv2.imshow("ZONE", zone)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+
+    # count all pixes in condition
+    cnt = 0
+    for i in range(width):
+        for j in range(height):
+            if (zone[i, j] == [255,255]).all():
+                cnt += 1
+
+    percent = (100.0*cnt/(width*height))
+    print('Ranged zone   [%.2f%%]' % percent)
+
+    return cnt, percent, zone
+
+
 
 if __name__ == "__main__":
 
-    #for test
-    i = 0
-    X=0
-    Y=0
-    path='/home/pi/AgRobot/src/tools/'
-    for i in range(1):
-        capture_frame(None,X,Y,path)
+    # i = 0
+    # X = 0
+    # Y = 0
+    # path='/home/pi/AgRobot/src/tools/'
+    # for i in range(1):
+    #     capture_frame(None,X,Y,path)
+
+    zone_check(cv2.imread('test.jpg'),RED_RANGES)
 
 
 

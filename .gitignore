@@ -5,3 +5,6 @@
 .jpeg
 .png
 .bmp
+
+# IDE configuration
+.iml

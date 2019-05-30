@@ -26,7 +26,7 @@ nav.move_y(DISTANCE)
 
 from connector import send_msg
 import argparse
-import pandas as pd
+from imgRec import capture_frame,zone_check,RED_RANGES
 
 
 # MAX Length for 12m side with mm
@@ -52,7 +52,7 @@ class Navigator(object):
         # we need to load position from a log last time
 
         self._x = 0
-        self._y = 0
+        self._y = 750
        # try:
        #     df = pd.read_csv('nav.log', index_col=0, header=None,
        #                  parse_dates=True, squeeze=True).to_dict()
@@ -77,10 +77,19 @@ class Navigator(object):
     # hide this x set function for only check by this script
     def __delta_x(self,v):
         new_v = self._x + v
-        if new_v > MAX_X or new_v <= 0:
-            print('X !!! %d',new_v)
+
+        # [deprecated]
+        # this can just avoid go to mush with little step-length
+        # todo LASER FOR CHECK
+        _, _, roi = capture_frame('', 0, 0, './')
+        cnt, _, _ = zone_check(roi, RED_RANGES)
+
+        if cnt > 300:
+            print('Navigator: X detected red zone !')
+            return 'forbidden'
         else:
             self._x = new_v
+            return self._x
 
 
     @property
@@ -95,12 +104,16 @@ class Navigator(object):
     def __delta_y(self, v):
         new_v = self._y + v
         if new_v > MAX_Y or new_v <= 0:
-            print('Y !!! %d', new_v)
+            print('Y seems wrong %d', new_v)
+            return 'forbidden'
         else:
             self._y = new_v
+            return self._y
 
     def move_x(self, dis):
-        self.__delta_x(dis)
+        if self.__delta_x(dis) == 'forbidden':
+            return 'forbidden'
+
         cmd = "X"
         if dis >= 0:
             if dis < 10:
@@ -120,7 +133,9 @@ class Navigator(object):
         return send_msg(cmd.encode("ascii"))
 
     def move_y(self, dis):
-        self.__delta_y(dis)
+        # if self.__delta_y(dis) == 'forbidden':
+        #     return 'forbidden'
+
         cmd = "Y"
         if dis >= 0:
             if dis < 10:

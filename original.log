@@ -1,0 +1,550 @@
+commit 8295991e0f18b6dd6130639fa28d653418adf623
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Mon Jun 3 08:35:28 2019 +0800
+
+    Update record.txt
+
+commit 0fe3d6bd9500fee68205aae1a8622cc3d53c7195
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Fri May 31 20:52:44 2019 +0800
+
+    add kingou mail
+
+commit db8a9e0390b2a8389494b5fa4a5fbf1f43cf42d8
+Author: weiyq <wyq_l@qq.com>
+Date:   Fri May 31 20:20:11 2019 +0800
+
+    daily check
+
+commit 5d3fb649dac6d179bc46efaee9a68a1ee51ff8b3
+Author: weiyq <wyq_l@qq.com>
+Date:   Fri May 31 20:00:40 2019 +0800
+
+    try at most 100 times when sending email
+
+commit 10802bd82ec7c5eb6773a5d2f04a28ae3e4a8dc9
+Author: weiyq <wyq_l@qq.com>
+Date:   Fri May 31 19:58:52 2019 +0800
+
+    usless code
+
+commit 5cd4eba5d71c050c6fabdf4ba0a4315e0a0b4b75
+Author: weiyq <wyq_l@qq.com>
+Date:   Fri May 31 19:56:55 2019 +0800
+
+    comment
+
+commit 547ae6dc74568aa8c76a0e1db1aeb31e8a33e23c
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Fri May 31 20:22:19 2019 +0800
+
+    1
+
+commit 609540512895fec667bb561b7b7f1dcbb1637822
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Fri May 31 19:40:33 2019 +0800
+
+    change little
+
+commit 94e5aec4ea0610e8a27762a40490f06ba2687db5
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Fri May 31 19:34:42 2019 +0800
+
+    change pics store server
+
+commit 38d0d7e14f778ac3016f8d8058246cf6ae76f758
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Thu May 30 18:29:09 2019 +0800
+
+    Update record.txt
+
+commit 4d57f3d31a3e5a7fb395f68b66c8a3209ce157f4
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Thu May 30 18:28:50 2019 +0800
+
+    Update record.txt
+
+commit 44e245b0befcad109c29039bb15f0fbf87ef35f7
+Author: hmxf <gouych13@icloud.com>
+Date:   Thu May 30 03:53:44 2019 +0800
+
+    Update README.md
+    
+    Add hardware subfolder under doc folder to store the circuit design of every robot version
+
+commit 90666e99c47519537cb846b8e22a4d16a79b79d5
+Author: hmxf <gouych13@icloud.com>
+Date:   Thu May 30 03:50:04 2019 +0800
+
+    Add current circuit schematic of the robot.
+    
+    Version One. Robot Code Name: Guardian.
+
+commit fef92045940d319b76a7ffa08ada4b5efca00e64
+Author: hmxf <gouych13@icloud.com>
+Date:   Thu May 30 03:45:33 2019 +0800
+
+    Create README.md
+
+commit 899666bc80c37d5f1ba249792f60837ce0ddeb80
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 30 09:30:29 2019 +0800
+
+    ignore IDE configuration
+
+commit 9240b022de26a05ffccebb16123178a6d0da99af
+Author: hmxf <gouych13@icloud.com>
+Date:   Tue May 28 22:24:18 2019 +0800
+
+    Create Control_System_ver_0.2.ino
+    
+       FINISHED
+       1. LED and POWER control Function is now added.
+       2. Add software limitation to avoid wrong move commands.
+       3. Use Hardware limitation to help calibrate the Y-axis.
+       TO DO
+       1. Add RELIABLE sensor to mesure the distance to the end of the track.
+
+commit f920bda7dac63447b6fc993c3395173702c21b53
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Tue May 28 18:16:54 2019 +0800
+
+    create send email from pi function--wyq
+
+commit 2cf9dbc82d79627f64bd05cb6ce8d621cd969619
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Mon May 27 19:08:25 2019 +0800
+
+    Update record.txt
+
+commit f237e0333a31f94f81888dd1a654f900d8377c9f
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Tue May 28 17:07:31 2019 +0800
+
+    finish backup automoly
+
+commit 289946ff98b71a9f257e8a95052980eaa324f222
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Fri May 24 20:02:53 2019 +0800
+
+    Update record.txt
+
+commit 04fea632e7e242fcbd084df614ce0fff5367d058
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 23 19:41:22 2019 +0800
+
+    bugs in splice_v fixed
+
+commit 9ed9da2b9a5adc863f394d1c1ab86dc7604753df
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 23 09:11:38 2019 +0800
+
+    Add splice script
+
+commit 7aad6d869ec23fc8a94f3a2c4d56114f5a8b6dcf
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Wed May 22 10:09:14 2019 +0800
+
+    update ignore pictures
+
+commit 15cc94b2edb28c17f14cbba78f5f4f4b5af64efe
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Wed May 22 10:08:56 2019 +0800
+
+    All images splicer
+
+commit 4d556617c93593dbe64847a6618947c6cb73af5f
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 23 15:56:52 2019 +0800
+
+    words fixed
+
+commit 9b3b9c5766ae404ef6a1dd7b731e30a5d9fb16e1
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 23 15:39:31 2019 +0800
+
+    add requirements
+
+commit 236aba795961d858be04c589b0ef7a6ee8cadcea
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Wed May 22 08:33:38 2019 +0800
+
+    Update record.txt
+
+commit dddfe3553f7de2d8b576c2d08ce257318669e85b
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Thu May 23 02:23:32 2019 +0100
+
+    roll back to liuxins code cos ACM0 sometimes changes to ACM1
+
+commit 76b5fb378653f94a2629c11e95f2bad8f575851d
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Thu May 23 02:21:30 2019 +0100
+
+    update
+
+commit d63fc7b8340cda8f948117a81844b8ca5036f234
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Thu May 23 02:20:04 2019 +0100
+
+    fix bug of capture_frame
+
+commit b16af9b033c02496b7d4bdad062050086a5dd064
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Wed May 22 17:57:39 2019 +0800
+
+    sleep 3 to 4
+
+commit eb03503cac96fb9ff31eac1772edb279bc1fb4c9
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Wed May 22 17:54:22 2019 +0800
+
+    change shot 2 time per 1M to shot 3 times
+
+commit 3a262f486e5225fa0f6dec0093b508d94a18e703
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Wed May 22 17:23:24 2019 +0800
+
+    add param path to capture frame
+
+commit 122d5a8768473dcf1a5b0c2bbc9e97427b445b55
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Wed May 22 16:14:43 2019 +0800
+
+    add param path
+
+commit c9ce4ef4f6cb550829330651df7ed05a245036a9
+Author: WeiYongqiang55 <wyq_l@qq.com>
+Date:   Wed May 22 16:13:23 2019 +0800
+
+    mkdir by pathon ,get current time
+
+commit 0ac28611335ff7c3ee1dd0d9abb7481a038b34df
+Author: 魏永强 <2582869579@qq.com>
+Date:   Tue May 21 21:53:37 2019 +0800
+
+    update, move X and Y to take pics auto
+
+commit bd3775abddddcb7d7cc98695ebeb2bf68dab35b9
+Author: 魏永强 <2582869579@qq.com>
+Date:   Tue May 21 21:51:34 2019 +0800
+
+    connect  every time to move
+
+commit 3b2e0125928f99450d6e2bfae340c21dce330e0e
+Author: 魏永强 <2582869579@qq.com>
+Date:   Tue May 21 21:49:12 2019 +0800
+
+    add try to ser send msg
+
+commit 3074b322e2006328724dd36bb75b98bbc1fc09b9
+Author: 魏永强 <2582869579@qq.com>
+Date:   Tue May 21 21:45:38 2019 +0800
+
+    update imgRec
+
+commit e6960b826d41430748146dbbf2d5b8e3678105a0
+Author: weiyq <wyq_l@qq.com>
+Date:   Tue May 21 15:44:38 2019 +0800
+
+    update imgRec.py
+
+commit 819cd7b58d608b8b4ac4f85a07d794e9c0ef2562
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Tue May 21 15:01:56 2019 +0800
+
+    update README
+
+commit e33ddb001bf6e515d1d274da59993dfe351d435e
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Tue May 21 10:39:04 2019 +0800
+
+    add path append to init
+
+commit 536b99449982720ffbe5cd149c56c71e0d7d02d2
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 20 18:09:21 2019 +0800
+
+    list all usb device with name
+
+commit d4b57d2e7e415a9fa9c4f9ee8d5aea34410d1818
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 20 18:08:53 2019 +0800
+
+    code own motd
+
+commit de43fa12d4838a99058c8b6590cb7e76a07c8273
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 20 18:08:28 2019 +0800
+
+    add motd file
+
+commit 10f404e2ddc36f15d0b0abef053cb09d9b404fc0
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Sat May 18 22:29:39 2019 +0800
+
+    Update record.txt
+
+commit a469d7b69fc2933ba60faba4ba18b9cded198d00
+Author: hmxf <gouych13@icloud.com>
+Date:   Sat May 18 17:54:08 2019 +0800
+
+    Add Control System Code Version 0.1
+
+commit 9ace021b498e9386781aac02b6f339b0c0f5c5b6
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 20 09:21:12 2019 +0800
+
+    add 'echo y' for auto-install
+
+commit 58f040c22eeb537aaa15cc5fe997b18b0c6c2f37
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sun May 19 10:31:17 2019 +0800
+
+    bug fixed
+
+commit 2bbe3a65f9eed46e3bbab422c4bed85805d570cd
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sun May 19 10:30:51 2019 +0800
+
+    Add software installation
+
+commit c830794b5ba07c17b7bce1f85c553d019bf9a646
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sat May 18 11:03:00 2019 +0800
+
+    add two shell for camera capture
+
+commit 9869570bfa9910aaeac332dcd7c57655ee68b9a0
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sat May 18 10:53:22 2019 +0800
+
+    modified move route
+
+commit 453f269cfb2d8047d0ad8c551f2a0ff3b7e293e9
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sat May 18 10:52:59 2019 +0800
+
+    add methods
+
+commit 9b1a9cdf4d00ee0d959ce5f179290b34b13a4dc5
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sat May 18 10:52:44 2019 +0800
+
+    new crop method
+
+commit a5b319a5ccd7981564e6d591f1a0b4e99c0298d9
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Fri May 17 09:36:21 2019 +0800
+
+    Re-structure the watering records
+
+commit fb7b893f7e7950c8646965c78fe88e8a4ba4641a
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 16 20:10:39 2019 +0800
+
+    update wei's work
+
+commit b413002a921c7837a4c5abec88467f4920b1d167
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 16 20:08:44 2019 +0800
+
+    roll back to opencv version
+
+commit 65f5704fd407082f9d3644dbecd94f1b63f3f74e
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 16 15:46:21 2019 +0800
+
+    fix into sync
+
+commit 7c5b1675d6b7dc99538c1e8c31c9d104daebd876
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 16 15:36:59 2019 +0800
+
+    fix
+
+commit 010ae6a6f6121720db051660299fda398c7338b2
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 16 15:21:28 2019 +0800
+
+    try use fswebcamera to capture these
+
+commit 2d1ec33a2d9783776d61ea408817fae43cdfc46e
+Author: weiyq <wyq_l@qq.com>
+Date:   Thu May 16 14:46:23 2019 +0800
+
+    format
+
+commit 71e7b15bfb6f15e916cdb7c4c0d771c7bd74eaf2
+Author: weiyq <wyq_l@qq.com>
+Date:   Thu May 16 14:40:51 2019 +0800
+
+    combined two pics instead of frames
+
+commit 95ead576ca247a71db0155031ba3159171c60698
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Wed May 15 18:47:26 2019 +0800
+
+    Update record.txt
+
+commit 3a34349c1ee820573fef752ccff947e4f49dc777
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 16 09:42:48 2019 +0800
+
+    update crop method
+
+commit b8dd86cd4cfed6ec477160d2c3671f3d885f3ea0
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Wed May 15 10:20:43 2019 +0800
+
+    remove photos in master
+
+commit 76eeb611791de5e1144858d9300c6319d421054d
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Wed May 15 15:46:29 2019 +0800
+
+    add photos rename script
+
+commit 10acd2e8924369d7b2c7d7b779bda3b2aa8680f4
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Wed May 15 15:46:03 2019 +0800
+
+    add navigator to control robot
+
+commit 1332fb52667c54f1394c89a08a838557f360ce71
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Tue May 14 17:21:13 2019 +0800
+
+    add photos-transfer script
+
+commit ecee15d9be8ea111dccda260a0a913f3fa634e7c
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Tue May 14 17:10:56 2019 +0800
+
+    camera test
+
+commit 7e58b02bf2758a97fec81d553271bf98b4e08b21
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Tue May 14 17:03:30 2019 +0800
+
+    re-structure
+
+commit bc85c775e0126f000ef806b77c37021a0ef8768d
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Mon May 13 18:34:29 2019 +0800
+
+    Update Readme.txt
+
+commit 5f1984c862bbb691932a8bf8abf9c91acac99b80
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Mon May 13 18:33:56 2019 +0800
+
+    Rename record to record.txt
+
+commit a99fb09c652c2db96d2201dca76fb68ef2aef626
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Mon May 13 18:33:20 2019 +0800
+
+    Create Readme.txt
+
+commit a58601d86c0a6234e8d6c6bbbdb1de578eaa902e
+Author: Yu Liang <50542627+paradox93@users.noreply.github.com>
+Date:   Mon May 13 18:31:34 2019 +0800
+
+    Create record
+
+commit 64918c56f7e5525108642995da6e6770311147d8
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Tue May 14 10:19:31 2019 +0800
+
+    add a navigator to control robot
+
+commit f8337e4607b5f963a178388bab883d5f50f117b9
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 13 21:09:30 2019 +0800
+
+    update cmd_sender for serials
+
+commit ed49928cbe17a054d239efe25592a8d3a46bf1d2
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 13 21:08:46 2019 +0800
+
+    change structure of tools
+
+commit 8736bf51e677b25365e869c3d3d0c2a82f92f604
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Mon May 13 21:04:06 2019 +0800
+
+    init package structure of source code
+
+commit d387dc53b209d7a74369a16e3790f6e274e998e9
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Sat May 11 16:31:35 2019 +0800
+
+    add com something
+
+commit 72528e20dd404225868023ee4204c598044d14b1
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Fri May 10 22:11:58 2019 +0800
+
+    add automatic-photos-take script
+
+commit 8e5be089f937399972652859f647dd9cd4b5e71a
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Fri May 10 22:11:08 2019 +0800
+
+    add zoom factor
+
+commit e9a48983ac7f6c7747eb7cea640a738573108620
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Thu May 9 11:03:36 2019 +0800
+
+    update .gitignore
+
+commit fba5b2a853dedbd8e6b277a5fd1f8606ee5040d4
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Thu May 9 11:01:51 2019 +0800
+
+    remove useless data for photos
+
+commit 965d33ceb06c4d94d9d733ab9bfa3af332c4f297
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Thu May 9 10:50:25 2019 +0800
+
+    test uploading photos
+
+commit f0fd66d155edc993ad59251784b8ef8f5e54ce7b
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 9 11:26:16 2019 +0800
+
+    capture images(or video) from two camera
+
+commit de42672cc74658d26a1d3b889c8bb413783ac826
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 9 11:25:38 2019 +0800
+
+    tools by ai structure
+
+commit 887ea87da8ade59e8f5eb838626f0f993719be1a
+Author: JChrysanthemum <624099049@qq.com>
+Date:   Thu May 9 11:24:42 2019 +0800
+
+    Add structure of this repo
+
+commit 7a8e2dc8c84f0844489166ecf841a4f881826f92
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Wed May 8 20:17:16 2019 +0800
+
+    update README
+
+commit de7c6b37b8d8c6417d08611dc3b170e11b4cc839
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Wed May 8 20:15:28 2019 +0800
+
+    add recommended repository structure to README
+
+commit bfc0be9c429ce38237d709206cca34daea27f249
+Author: Muchen Sun <sunmch15@foxmail.com>
+Date:   Wed May 8 20:03:26 2019 +0800
+
+    Initial commit

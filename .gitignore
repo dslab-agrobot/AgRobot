@@ -1,0 +1,10 @@
+.DS_Store
+
+# All pictures
+.jpg
+.jpeg
+.png
+.bmp
+
+# IDE configuration
+.iml
